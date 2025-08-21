@@ -30,13 +30,19 @@ Simple CI/CD to EC2 Developer (commit) → GitHub → GitHub Actions (build/depl
 SageMaker Studio with custom images System Admin → IAM (authenticate) → AWS SSO (set up) → Create SageMaker Studio domain → Assign researchers → Launch EC2 (build images) → Push images to Amazon ECR → Attach images to SageMaker Studio → Jupyter notebooks use custom images
 
 <img width="881" height="511" alt="image" src="https://github.com/user-attachments/assets/5e50cf88-e725-4e5b-98f7-2df3869f50b1" />
+Image Q&A with Bedrock, OpenSearch, S3, DynamoDB User/API client → Amazon API Gateway → AWS Lambda → store image in Amazon S3 → Amazon Bedrock (VLM, e.g., Sonnet) → Amazon Bedrock (Titan Text Embeddings) → Amazon OpenSearch Service (vector search; index prebuilt via SageMaker notebook) → Amazon Bedrock (LLM, generate answer) → AWS Lambda (persist query/response in DynamoDB) → Amazon API Gateway → User
 
 <img width="869" height="412" alt="image" src="https://github.com/user-attachments/assets/11556150-5fcf-4e6f-8ef2-a76d3a0f46f8" />
+Static site + Bedrock text generation Users → Amazon S3 (static pages hosting) Text request: Users → Amazon API Gateway → AWS Lambda → Amazon Bedrock → AWS Lambda → Amazon API Gateway → Users
 
 <img width="1111" height="741" alt="image" src="https://github.com/user-attachments/assets/ea073a68-8389-45cc-b7e0-fb905a897f9e" />
+Chatbot with Lex + Bedrock Knowledge Bases Static UI: Amazon S3 (web UI assets) → Amazon CloudFront → Users Chat: Users → GenAI Chat UI → Amazon Lex → Knowledge Bases for Amazon Bedrock → Amazon S3 (documents) → Knowledge Bases → Amazon Lex → GenAI Chat UI → Users
 
 <img width="1201" height="629" alt="image" src="https://github.com/user-attachments/assets/bc037976-35f8-4969-80fb-210201b0358a" />
+Amplify web app with Bedrock and Polly TTS Users → CloudFront → S3 (app assets, managed by Amplify) Auth: Users ↔ Amazon Cognito Q&A: Users → API Gateway → AWS Lambda → Amazon Bedrock → AWS Lambda → API Gateway → Users Optional TTS: UI text → Amazon Polly → audio to S3 → CloudFront → Users
 
 <img width="1538" height="710" alt="image" src="https://github.com/user-attachments/assets/dbfc3add-3366-4757-9c44-341ce8ef7d3d" />
+Streaming chat with Bedrock and DynamoDB memory Users ↔ AWS Lambda (response streaming) ↔ Amazon Bedrock (model streaming) ; Lambda ↔ Amazon DynamoDB (chat memory)
 
 <img width="1588" height="1172" alt="image" src="https://github.com/user-attachments/assets/7f38c0e4-476b-4c2b-9aa6-ce459b527f25" />
+Multi-endpoint GenAI (text→image, text→text, RAG with embeddings) Setup: SageMaker notebook → deploy endpoints (Text-to-Image, Text-to-Text, Text-to-Embedding) Users → Amplify front end → Cognito (login) → API Gateway → VPC links a) Text-to-Image: API Gateway → Lambda (text→image) → SageMaker Endpoint (text→image) → Lambda → Users b) Text-to-Text: API Gateway → Lambda (text→text) → SageMaker Endpoint (text→text) → Lambda → Users c) RAG: API Gateway → Lambda (RAG search) → SageMaker Endpoint (text→embedding) → Amazon OpenSearch (embeddings index) → Lambda → Users Indexing pipeline: Documents → Fargate indexing job → SageMaker Endpoint (text→embedding) → Amazon OpenSearch (embeddings index)
