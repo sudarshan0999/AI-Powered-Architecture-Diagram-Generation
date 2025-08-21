@@ -48,13 +48,27 @@ Streaming chat with Bedrock and DynamoDB memory Users ↔ AWS Lambda (response s
 Multi-endpoint GenAI (text→image, text→text, RAG with embeddings) Setup: SageMaker notebook → deploy endpoints (Text-to-Image, Text-to-Text, Text-to-Embedding) Users → Amplify front end → Cognito (login) → API Gateway → VPC links a) Text-to-Image: API Gateway → Lambda (text→image) → SageMaker Endpoint (text→image) → Lambda → Users b) Text-to-Text: API Gateway → Lambda (text→text) → SageMaker Endpoint (text→text) → Lambda → Users c) RAG: API Gateway → Lambda (RAG search) → SageMaker Endpoint (text→embedding) → Amazon OpenSearch (embeddings index) → Lambda → Users Indexing pipeline: Documents → Fargate indexing job → SageMaker Endpoint (text→embedding) → Amazon OpenSearch (embeddings index)
 
 <img width="1280" height="553" alt="image" src="https://github.com/user-attachments/assets/3f3d71f3-6284-46e0-9140-e7f454fe37e5" />
+Embedding Ingestion Path:
+Amazon Simple Storage Service (S3) → Trigger → AWS Lambda → AWS Bedrock (Embedding) → Pinecone
+
+Query & Retrieval Path:
+Client → Amazon API Gateway → AWS Lambda → AWS Bedrock (Embedding) → Pinecone (search)
 
 <img width="772" height="338" alt="image" src="https://github.com/user-attachments/assets/1480662f-504b-44f7-b76d-1f9e2d642f76" />
 
+User → Slack Workspace → Amazon Lex → Fulfillment Lambda → AWS Secrets Manager (for credentials) → Slack APIs / Office 365 APIs
+
 <img width="1400" height="959" alt="image" src="https://github.com/user-attachments/assets/0efb30d9-509c-4fa4-9674-d56ad2e80676" />
+
+Users (Caller) → Phone → Amazon Connect → Amazon Lex → AWS Lambda → Amazon DynamoDB → AWS Lambda → Amazon Lex → Amazon Connect → Users (Caller)
 
 <img width="990" height="591" alt="image" src="https://github.com/user-attachments/assets/1f6723d2-03ee-4952-9285-238fa4d39145" />
 
+Customers → PSTN → Amazon Connect → Amazon Lex → AWS Lambda → AWS Encryption SDK (with AWS KMS for CMK) → Plain Text Data / Encrypted Data → AWS Lambda → Amazon Lex → Amazon Connect → Customers
+
 <img width="871" height="501" alt="image" src="https://github.com/user-attachments/assets/961c4966-47be-4f07-ae54-82cbe96964a6" />
 
+Event CLI / Other Providers → DNS (Amazon Route 53) → Ingestion API (Amazon API Gateway) → API key authorizer (AWS Lambda) → API key store (Amazon DynamoDB) → Ingestion API logic (AWS Lambda) → Data lake (Amazon S3) / Message bus (Amazon SNS)
+
 <img width="1206" height="533" alt="image" src="https://github.com/user-attachments/assets/67deb442-2a24-4d5f-b281-ba243a26be87" />
+Client → Amazon CloudFront → Amazon API Gateway → AWS Lambda → Amazon S3 bucket (original image) → AWS Lambda (optimization) → Amazon API Gateway → Amazon CloudFront → Client (optimized image)
