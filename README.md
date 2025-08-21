@@ -46,3 +46,15 @@ Streaming chat with Bedrock and DynamoDB memory Users ↔ AWS Lambda (response s
 
 <img width="1588" height="1172" alt="image" src="https://github.com/user-attachments/assets/7f38c0e4-476b-4c2b-9aa6-ce459b527f25" />
 Multi-endpoint GenAI (text→image, text→text, RAG with embeddings) Setup: SageMaker notebook → deploy endpoints (Text-to-Image, Text-to-Text, Text-to-Embedding) Users → Amplify front end → Cognito (login) → API Gateway → VPC links a) Text-to-Image: API Gateway → Lambda (text→image) → SageMaker Endpoint (text→image) → Lambda → Users b) Text-to-Text: API Gateway → Lambda (text→text) → SageMaker Endpoint (text→text) → Lambda → Users c) RAG: API Gateway → Lambda (RAG search) → SageMaker Endpoint (text→embedding) → Amazon OpenSearch (embeddings index) → Lambda → Users Indexing pipeline: Documents → Fargate indexing job → SageMaker Endpoint (text→embedding) → Amazon OpenSearch (embeddings index)
+
+<img width="1280" height="553" alt="image" src="https://github.com/user-attachments/assets/3f3d71f3-6284-46e0-9140-e7f454fe37e5" />
+
+<img width="772" height="338" alt="image" src="https://github.com/user-attachments/assets/1480662f-504b-44f7-b76d-1f9e2d642f76" />
+
+<img width="1400" height="959" alt="image" src="https://github.com/user-attachments/assets/0efb30d9-509c-4fa4-9674-d56ad2e80676" />
+
+<img width="990" height="591" alt="image" src="https://github.com/user-attachments/assets/1f6723d2-03ee-4952-9285-238fa4d39145" />
+
+<img width="871" height="501" alt="image" src="https://github.com/user-attachments/assets/961c4966-47be-4f07-ae54-82cbe96964a6" />
+
+<img width="1206" height="533" alt="image" src="https://github.com/user-attachments/assets/67deb442-2a24-4d5f-b281-ba243a26be87" />
