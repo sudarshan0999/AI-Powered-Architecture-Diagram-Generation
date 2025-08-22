@@ -1,0 +1,112 @@
+{
+  "entities": [
+    {
+      "id": "dataset",
+      "type": "source",
+      "service": "dataset",
+      "label": "DataSet",
+      "bbox": [0.05, 0.45, 0.15, 0.55],
+      "style": {"shape": "rectangle", "color": "#232F3E", "fillColor": "#232F3E", "icon": "data"},
+      "cloud_provider": "enterprise",
+      "metadata": {"category": "data", "managed_service": false}
+    },
+    {
+      "id": "s3_source",
+      "type": "storage",
+      "service": "s3",
+      "label": "Amazon S3 (Source)",
+      "bbox": [0.2, 0.45, 0.35, 0.55],
+      "style": {"shape": "cylinder", "color": "#569A31", "fillColor": "#569A31", "icon": "storage"},
+      "cloud_provider": "aws",
+      "metadata": {"category": "storage", "managed_service": true}
+    },
+    {
+      "id": "databrew",
+      "type": "analytics",
+      "service": "glue-databrew",
+      "label": "AWS Glue DataBrew (Clean/Transform)",
+      "bbox": [0.4, 0.65, 0.55, 0.75],
+      "style": {"shape": "rounded_rectangle", "color": "#FF9900", "fillColor": "#FF9900", "icon": "etl"},
+      "cloud_provider": "aws",
+      "metadata": {"category": "analytics", "managed_service": true}
+    },
+    {
+      "id": "s3_dest",
+      "type": "storage",
+      "service": "s3",
+      "label": "Amazon S3 (Destination)",
+      "bbox": [0.6, 0.65, 0.75, 0.75],
+      "style": {"shape": "cylinder", "color": "#569A31", "fillColor": "#569A31", "icon": "storage"},
+      "cloud_provider": "aws",
+      "metadata": {"category": "storage", "managed_service": true}
+    },
+    {
+      "id": "crawler",
+      "type": "analytics",
+      "service": "glue-crawler",
+      "label": "AWS Glue Crawler (Catalog Tables)",
+      "bbox": [0.4, 0.45, 0.55, 0.55],
+      "style": {"shape": "rounded_rectangle", "color": "#FF9900", "fillColor": "#FF9900", "icon": "catalog"},
+      "cloud_provider": "aws",
+      "metadata": {"category": "analytics", "managed_service": true}
+    },
+    {
+      "id": "athena",
+      "type": "analytics",
+      "service": "athena",
+      "label": "Amazon Athena (SQL/Query)",
+      "bbox": [0.6, 0.45, 0.75, 0.55],
+      "style": {"shape": "rounded_rectangle", "color": "#146EB4", "fillColor": "#146EB4", "icon": "sql"},
+      "cloud_provider": "aws",
+      "metadata": {"category": "analytics", "managed_service": true}
+    },
+    {
+      "id": "sagemaker",
+      "type": "ai",
+      "service": "sagemaker",
+      "label": "Amazon SageMaker (Train/Host)",
+      "bbox": [0.8, 0.45, 0.95, 0.55],
+      "style": {"shape": "rounded_rectangle", "color": "#FF9900", "fillColor": "#FF9900", "icon": "ml"},
+      "cloud_provider": "aws",
+      "metadata": {"category": "ai", "managed_service": true}
+    },
+    {
+      "id": "quicksight",
+      "type": "analytics",
+      "service": "quicksight",
+      "label": "Amazon QuickSight (Dashboards)",
+      "bbox": [0.8, 0.25, 0.95, 0.35],
+      "style": {"shape": "rounded_rectangle", "color": "#232F3E", "fillColor": "#232F3E", "icon": "bi"},
+      "cloud_provider": "aws",
+      "metadata": {"category": "analytics", "managed_service": true}
+    },
+    {
+      "id": "cloudwatch",
+      "type": "monitoring",
+      "service": "cloudwatch",
+      "label": "Amazon CloudWatch (Monitoring/Logs)",
+      "bbox": [0.95, 0.65, 1.1, 0.75],
+      "style": {"shape": "rounded_rectangle", "color": "#232F3E", "fillColor": "#232F3E", "icon": "monitor"},
+      "cloud_provider": "aws",
+      "metadata": {"category": "monitoring", "managed_service": true}
+    }
+  ],
+  "relationships": [
+    {"id": "rel1", "source": "dataset", "target": "s3_source", "type": "loads", "label": "Raw Data Load", "style": {"arrow": true, "lineType": "solid", "color": "#666666"}},
+    {"id": "rel2", "source": "s3_source", "target": "databrew", "type": "reads", "label": "Read Raw Data", "style": {"arrow": true, "lineType": "solid", "color": "#666666"}},
+    {"id": "rel3", "source": "databrew", "target": "s3_dest", "type": "writes", "label": "Write Curated Data", "style": {"arrow": true, "lineType": "solid", "color": "#666666"}},
+    {"id": "rel4", "source": "databrew", "target": "crawler", "type": "crawls", "label": "Crawl for Schema", "style": {"arrow": true, "lineType": "solid", "color": "#666666"}},
+    {"id": "rel5", "source": "crawler", "target": "athena", "type": "catalogs", "label": "Catalog Tables", "style": {"arrow": true, "lineType": "solid", "color": "#666666"}},
+    {"id": "rel6", "source": "athena", "target": "sagemaker", "type": "queries", "label": "Query for ML Training", "style": {"arrow": true, "lineType": "solid", "color": "#666666"}},
+    {"id": "rel7", "source": "sagemaker", "target": "quicksight", "type": "feeds", "label": "Feed Predictions", "style": {"arrow": true, "lineType": "solid", "color": "#666666"}},
+    {"id": "rel8", "source": "sagemaker", "target": "cloudwatch", "type": "monitors", "label": "Logs & Metrics", "style": {"arrow": true, "lineType": "dashed", "color": "#888888"}}
+  ],
+  "metadata": {
+    "entity_count": 9,
+    "relationship_count": 8,
+    "cloud_provider": "aws",
+    "pattern": "data_analytics_pipeline",
+    "scenario": "Dataset ingestion, cleaning, cataloging, querying, ML training, visualization, monitoring",
+    "diagram_type": "cloud_architecture"
+  }
+}
