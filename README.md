@@ -92,3 +92,4 @@ AI-Assisted, Not AI-Only: Their philosophy is to assist developers, not replace 
 Flexible Inputs: The system is designed to accept a variety of inputs beyond natural language, including infrastructure-as-code files (like Terraform), code excerpts, and even image files, which are then translated into diagrams.   
 
 In summary, Eraser.io made its tool by integrating a powerful, existing LLM (GPT-4) with its own robust diagram-as-code platform. They rely on sophisticated prompt engineering to translate user requests into diagram syntax, rather than training a custom AI model on user data.
+<img width="724" height="227" alt="download" src="https://github.com/user-attachments/assets/ed8184fd-8e62-4be5-8cee-e77e33a729e5" />
